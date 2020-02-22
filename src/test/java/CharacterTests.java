@@ -91,7 +91,8 @@ public class CharacterTests {
 
     @ParameterizedTest
     @MethodSource("attackParameters")
-    public void assdasd(int hits, boolean expectedIsAlive) throws Exception {
+    public void attack_performedNTimes_targetIsKilledIfAttackedMoreTimesThanHisHp
+            (int hits, boolean expectedIsAlive) throws Exception {
         Character first = new Character("Czesiek", "Kowalski", 10, null);
         Character second = new Character("Franek", "Kimono", 10, null);
 

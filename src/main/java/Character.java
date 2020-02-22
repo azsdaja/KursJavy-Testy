@@ -8,6 +8,8 @@ public class Character
     public String lastName;
     public int hp;
     public int maxHp;
+
+
     private FacebookProvider facebookProvider;
 
     public Character(String firstName, String lastName, int maxHp, FacebookProvider facebookProvider){
@@ -31,8 +33,8 @@ public class Character
         other.hp--;
     }
 
+
     public void attackFriends() throws Exception {
-        facebookProvider.GetFriends(getFullName());
         List<Character> friends = facebookProvider.GetFriends(getFullName());
         for (Character friend:friends){
             attack(friend);
