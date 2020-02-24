@@ -9,10 +9,6 @@ public class Calculator {
         this.subcalculator = subcalculator;
     }
 
-    public int Add(int first, int second) {
-        return 0;
-    }
-
     public int Add(int... numbers) {
         int result = 0;
         for (int number : numbers) {

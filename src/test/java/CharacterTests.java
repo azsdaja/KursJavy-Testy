@@ -4,6 +4,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +20,47 @@ public class CharacterTests {
         assertThat(character.hp).isEqualTo(10);
         assertThat(character.maxHp).isEqualTo(10);
         assertThat(character.getFullName()).isEqualTo("Czesiek Kowalski");
+    }
+
+    @Test
+    public void twoSameCharactersAreNotEqual(){
+        Character character1 = new Character("Czesiek", "Kowalski", 10, null);
+        Character character2 = new Character("Czesiek", "Kowalski", 10, null);
+
+        assertThat(character1).isNotEqualTo(character2);
+    }
+
+    @Test
+    public void twoSameCharacterAreEqualComparingFieldByField(){
+        Character character1 = new Character("Czesiek", "Kowalski", 10, null);
+        Character character2 = new Character("Czesiek", "Kowalski", 10, null);
+
+        assertThat(character1).isEqualToComparingFieldByField(character2);
+    }
+
+    @Test
+    public void colletion_asserts(){
+        Character character1 = new Character("Czesiek1", "Kowalski", 10, null);
+        Character character2 = new Character("Czesiek2", "Kowalski", 10, null);
+        Character character3 = new Character("Czesiek3", "Kowalski", 10, null);
+
+        List<Character> twoCharacters = Arrays.asList(character1, character2);
+
+        assertThat(twoCharacters).contains(character2);
+        assertThat(twoCharacters).doesNotContain(character3);
+    }
+
+    @Test
+    public void createdCharacterHasCorrectHpAndIsAlive(){
+        Character alive = new Character("Czesiek1",
+                "Kowalski", 10, null);
+        Character dead = new Character("Czesiek1",
+                "Kowalski", 0, null);
+
+        CharacterAssert.assertThat(alive).isAlive().hasHp(10);
+        CharacterAssert.assertThat(alive).hasHp(10).isAlive();
+
+        // CharacterAssert.assertThat(dead).isAlive(); // should fail
     }
 
     @Test
